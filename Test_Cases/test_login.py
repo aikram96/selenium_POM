@@ -15,10 +15,11 @@ class TestLogin(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.driver = webdriver.Chrome(executable_path="Drivers/chromedriver.exe")
+        cls.driver = webdriver.Chrome(executable_path="C:/Users/aikra/Documents/Selenium-Python-POM/Drivers/chromedriver.exe")
         cls.driver.get("https://opensource-demo.orangehrmlive.com/")
         cls.driver.maximize_window()
         cls.login_page = login_page(driver=cls.driver)
+        cls.driver.implicitly_wait(time_to_wait=50)
 
     @file_data(os.path.join("Data", "data_login.json"))
     def test_login(self, username, password):
@@ -27,12 +28,13 @@ class TestLogin(unittest.TestCase):
 
         # Assertions
         assert is_login_successful is True
+        print("----- Successfully Login -----")
 
     @classmethod
     def tearDownClass(cls):
-        cls.driver.close()
+        cls.driver.quit()
 
 
 if __name__ == '__main__':
     unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(
-        output="C://Users//aikra//Documents//Selenium-Python-POM//reports", report_name="Login2"))
+        output="C://Users//aikra//Documents//Selenium-Python-POM//reports", report_name="Login"))
